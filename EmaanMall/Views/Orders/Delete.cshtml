@@ -1,0 +1,129 @@
+﻿@model EmaanMall.Models.Order
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderSubTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderSubTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderTotalPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderTotalPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDeliveryCharges)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDeliveryCharges)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDiscountPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDiscountPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderGST)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderGST)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderPaymentMethod)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderPaymentMethod)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderShippingAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderShippingAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderShippingProvince)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderShippingProvince)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderShippingCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderShippingCity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderRecipentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderRecipentName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderRecipentPhone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderRecipentPhone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderRecipentEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderRecipentEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderNo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderReceiveAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderReceiveAmount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderRemainingAmount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderRemainingAmount)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="OrderId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

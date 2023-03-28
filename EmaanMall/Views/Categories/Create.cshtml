@@ -1,0 +1,148 @@
+﻿@model EmaanMall.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section productCreatejscss{
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/simple-line-icon.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+}
+
+
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3> Create Categories</h3>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CategoryIcon" class="control-label">Category Icon</label>
+                                    <input type="file" name="Images" asp-for="CategoryIcon" class="form-control imgs" required />
+
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CategoryName" class="control-label">Category Name</label>
+                                    <input asp-for="CategoryName" class="form-control" required />
+                                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Create</button><a asp-action="Index" class="btn btn-danger">Cancel</a></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section productCreatejs{
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+
+    <script src="../assets/js/icons/icons-notify.js"></script>
+    <script src="../assets/js/icons/icon-clipart.js"></script>
+
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
+}
+
+<script>
+
+    //multiselector start
+    function Add() {
+        let div = document.createElement("div");
+        let li = document.createElement('input');
+        li.name = "Images";
+        li.type = "file";
+        li.classList = "imgs";
+        let del = document.createElement('button')
+        del.innerText = "Delete";
+
+        del.addEventListener("click", (e) => {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        });
+        div.appendChild(li);
+        div.appendChild(del);
+        document.querySelector('.text').appendChild(div);
+    }
+
+    function Delete() {
+        console.log(this.parentNode.remove());
+    }
+    //multiselector end
+    /////////image
+
+    function showImage() {
+        var file_data = $("#fileInput").prop("files")[0];
+        $('#ImageTab').append('<img style="cursor:pointer;width:150px;height:150px;" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFile()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtn').hide();
+        validateCust();
+
+    }
+
+    function ClearFile() {
+        $('#fileInput').val('');
+        $('#ImageTab').empty();
+        $('#selectImageBtn').show();
+        validateCust();
+
+    }
+
+    function showImageEdit() {
+        var file_data = $("#fileInputEdit").prop("files")[0];
+        $('#ImageTabEdit').append('<img style="cursor:pointer" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFileEdit()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtnEdit').hide();
+        validateCust();
+
+    }
+
+    function ClearFileEdit() {
+        $('#fileInputEdit').val('');
+        $('#ImageTabEdit').empty();
+        $('#selectImageBtnEdit').show();
+        validateCust();
+    }
+</script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

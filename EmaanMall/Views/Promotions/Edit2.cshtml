@@ -1,0 +1,116 @@
+﻿
+@model EmaanMall.Models.ViewModel.promotionsVM
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+@section productCreatejscss{
+
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/select2.css">
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-5">
+                <h3>Edit Promotion Products</h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<form asp-action="Edit2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form theme-form">
+                            <input hidden asp-for="promotions.PromotionsId" />
+                            <div class="row">
+                                @* <div class="col-sm-6">
+            <div class="form-group">
+
+                <label class="form-label">Select Promotions:</label>
+                <select class="form-control btn-square" asp-for="promotions.PromotionsId" asp-items="ViewBag.promotions" required>
+                </select>
+                <span asp-validation-for="promotions.PromotionsId" class="text-danger"></span>
+            </div>
+        </div>*@
+                                <div class="col-sm-4 ">
+                                    <img src="~/Uploads/promotions/@Model.promotions.Image" class="float-left" style="width:240px; height:150px;" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="container-fluid">
+                                            <div class="select2-drpdwn">
+                                                <div class="row">
+                                                    <!-- Default Textbox start-->
+                                                    <div class="col-md-12">
+
+                                                        <div class="mb-2">
+                                                            <div class="col-form-label">Select Products:</div>
+                                                            <select class="js-example-placeholder-multiple productsPlaceHolder col-sm-12" asp-for="ProductIds" asp-items="ViewBag.ProductIds" multiple="multiple">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group mb-0">
+                                        <input type="submit" value="Edit" class="btn btn-success mr-3" />
+                                        <a class="btn btn-danger" href="~/Promotions/Index">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+
+    <script src="~/assets/js/select2/select2.full.min.js"></script>
+    <script src="~/assets/js/select2/select2-custom.js"></script>
+    <script type="text/javascript">
+
+        $(".productsPlaceHolder").select2({
+            placeholder: "Select products "
+        });
+        debugger;
+
+        $(document).ready(function () {
+            debugger;
+            var productddl = $('#product1');
+
+            $.ajax({
+                type: "post",
+                url: "/Promotions/GetProducts",
+                datatype: "json",
+                traditional: true,
+                success: function (data) {   //data is the json response from server
+                    debugger;
+                    productddl.append($('<option/>', { value: -1, text: '--Select Products--' }));
+
+                    $(data).each(function (index, item) {
+                        productddl.append($('<option/>', { value: item.value, text: item.text }));
+                    });
+                }
+            });
+
+
+        });
+    </script>
+
+}

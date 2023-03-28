@@ -1,0 +1,247 @@
+﻿@model IEnumerable<EmaanMall.Models.ProductInquiry>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <!-- Container-fluid starts-->
+    <div class="page-body-wrapper sidebar-icon">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Product Inquiry List</h3>
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Zero Configuration  Starts-->
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="display" id="basic-1">
+
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-center">
+                                                Customer Name
+                                            </th>
+                                            <th class="text-center">
+                                                Product Name
+                                            </th>
+                                            <th class="text-center">
+                                                Date
+                                            </th>
+                                            <th class="text-center">
+                                                Status
+                                            </th>
+                                            <th class="text-center">
+                                                Inquiry Status
+                                            </th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @{var count = 0; }
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>@{ count = count + 1; } @count</td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.customer.FirstName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.productDetail.Product.ProductName)
+                                            </td>
+                                            <td>
+                                                @Convert.ToString(string.Format("{0:d/M/yyyy}", item.ProductInquiryDate))
+                                            </td>
+                                            @if (item.Status == true)
+                                            {
+                                                <td class="text-success py-1 text-center">Active</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-danger py-1 text-center">Deactive</td>
+                                            }
+                                            <td>
+                                                @if (item.ProductInquiryStatus == "pending")
+                                                {
+                                                    <select id="select1" onchange="ChangeInquiryStatus(this,@item.ProductInquiryId)" style="height:30px; border-radius:10px;">
+                                                        <option value="pending" selected>Pending</option>
+                                                        <option value="processing">Processing</option>
+                                                        <option value="approved">Approved</option>
+                                                        <option value="unapproved">unApproved</option>
+                                                    </select>
+                                                }
+                                                else if (item.ProductInquiryStatus == "processing")
+                                                {
+
+                                                    <select id="select1" onchange="ChangeInquiryStatus(this,@item.ProductInquiryId)" style="height:30px; border-radius:10px;">
+                                                        <option value="pending">Pending</option>
+                                                        <option value="processing" selected>Processing</option>
+                                                        <option value="approved">Approved</option>
+                                                        <option value="unapproved">unApproved</option>
+                                                    </select>
+                                                }
+                                                else if (item.ProductInquiryStatus == "approved")
+                                                {
+
+                                                    <select id="select1" onchange="ChangeInquiryStatus(this,@item.ProductInquiryId)" style="height:30px; border-radius:10px;">
+                                                        <option value="pending">Pending</option>
+                                                        <option value="processing">Processing</option>
+                                                        <option value="approved" selected>Approved</option>
+                                                        <option value="unapproved">unApproved</option>
+                                                    </select>
+                                                }
+                                                else if (item.ProductInquiryStatus == "unapproved")
+                                                {
+
+                                                    <select id="select1" onchange="ChangeInquiryStatus(this,@item.ProductInquiryId)" style="height:30px; border-radius:10px;">
+                                                        <option value="pending">Pending</option>
+                                                        <option value="processing">Processing</option>
+                                                        <option value="approved">Approved</option>
+                                                        <option value="unapproved" selected>unApproved</option>
+                                                    </select>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+
+                                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-warning" style="padding-left:12px;padding-right:12px"  asp-action="Details" asp-route-id="@item.ProductInquiryId" title="Details"><i class="icon-comment-alt"></i></a>
+                                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px"  data-toggle="modal" data-target="#deleteModal_@count" title="Delete"><i class="icon-trash"></i></a>
+                                                <div class="modal fade" id="deleteModal_@count" tabindex="-1" role="dialog" aria-labelledby="deleteModal_@count" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete Inquiry</h5>
+                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <form>
+
+                                                                    <div class="form-group">
+                                                                        <h5 class="text-danger">Are you sure you want to delete this?</h5>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+
+
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                                                <form>
+                                                                    <a class="btn btn-primary" asp-controller="ProductInquiries" asp-action="Delete" asp-route-id="@item.ProductInquiryId">Delete</a>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" style="padding-left:12px;padding-right:12px"  data-toggle="modal" onclick="Selectedid(@item.ProductInquiryId)" data-target="#adminRemarks" title="Add Admin Remarks"><i class="ion ion-plus"></i></a>
+
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="adminRemarks" tabindex="-1" role="dialog" aria-labelledby="adminRemarks" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Admin Remarks</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+
+          @*  <div class="modal-body">
+
+                <h6><b>Customer Name :</b>  @item.customer.FirstName @item.customer.LastName</h6>
+                <h6><b>Product Name : </b>@item.productDetail.Product.ProductName</h6>
+
+
+            </div>*@
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1" style="color:red;">Remarks:</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="exampleFormControlTextarea1"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <form asp-action="IndexP">
+                    @Html.Hidden("id", 0)
+                    @Html.Hidden("remarks", 0)
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+
+                    <button class="btn btn-primary" type="submit" onclick="SelectedRemarks()">Add</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        function ChangeInquiryStatus(val, id) {
+            var Status = val.value;
+            $.ajax({
+                type: "Post",
+                url: '/ProductInquiries/ChangeInquiryStatus',
+                data: {
+                    id: id,
+                    Status: Status
+                },
+                success: function (json) {
+                    if (json == "Success") {
+
+                        window.location.reload();
+                    }
+
+                },
+                error: function (xhr) {
+
+                }
+            });
+        }
+
+    </script>
+    <script type="text/javascript">
+
+    function SelectedRemarks(obj) {
+        document.getElementById('remarks').value = document.getElementById('exampleFormControlTextarea1').value;
+        return false;
+        }
+        function Selectedid(obj) {
+            document.getElementById('id').value = obj;
+            return false;
+        }
+    </script>
+
+}

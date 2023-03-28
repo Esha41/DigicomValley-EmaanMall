@@ -1,0 +1,121 @@
+﻿
+@model IEnumerable<EmaanMall.Models.Vendor>
+    @{
+        ViewData["Title"] = "Vendors";
+
+    }
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-3">
+                    <h3>All Vendor</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="setup-content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="display" id="basic-2">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>
+                                                Photo
+                                            </th>
+                                            <th>
+                                                Name
+                                            </th>
+
+
+                                            <th class="text-center">
+                                                Phone No
+                                            </th>
+
+                                            <th class="text-center">
+                                                Email
+                                            </th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Is Verified</th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @{foreach (var item in Model)
+                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <img src="~/Uploads/@item.Image" class="img-100 img-fluid m-r-20 rounded-circle update_img_0" style="width:100px; height:100px;" />
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        @Html.DisplayFor(modelItem => item.VendorName)
+                                                                                    </td>
+
+                                                                                    <td class="text-center">
+                                                                                        @Convert.ToString(string.Format("{0:d/M/yyyy}", item.Phone))
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @Convert.ToString(string.Format("{0:d/M/yyyy}", item.Email))
+                                                                                    </td>
+                                                                                   @if (item.Status == true)
+                                                                                    {
+                                                                                        <td class="text-success py-1">Active</td>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <td class="text-danger py-1">Deactive</td>
+                                                                                    }
+                                                                                    @if (item.IsVerified == true)
+                                                                                    {
+                                                                                        <td class="text-success py-1">Verified</td>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <td class="text-danger py-1">Unverified</td>
+                                                                                    }
+                                                                                    <td class="text-center">
+                                                                                        <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-info" asp-action="Profile" asp-route-id="@item.VendorId"><i class="icon-comment-alt"></i></a>
+                                                                                        @if (item.Status == true)
+                                                                                        {
+                                                                                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" asp-action="ChangeVendorStatus" asp-route-id="@item.VendorId"><i class="icon-power-off" title="Click For Offline"></i></a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" asp-action="ChangeVendorStatus" asp-route-id="@item.VendorId"><i class="icon-power-off" title="Click For Online"></i></a>
+
+                                                                                        }
+                                                                                        @if (item.IsVerified == true)
+                                                                                        {
+                                                                                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" asp-action="ChangeVerifyStatus" asp-route-id="@item.VendorId"><i class="icon-check" title="Click For Verify"></i></a>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" asp-action="ChangeVerifyStatus" asp-route-id="@item.VendorId"><i class="icon-close" title="Click For Unverify"></i></a>
+
+                                                                                        }
+                                                                                    </td>
+                                                                                </tr>
+                                               
+                                            }
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

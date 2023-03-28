@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EmaanMall.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<!-- tap on tap ends-->
+<!-- page-wrapper Start-->
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>All Customers</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="display" id="basic-1">
+                <thead>
+                    <tr>
+                        <th>
+                            Customer Name
+                        </th>
+
+
+
+                        <th class="text-center">
+                            Phone No
+                        </th>
+
+                        <th class="text-center">
+                            Email
+                        </th>
+                        <th class="text-center">
+                            Address
+                        </th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName) &nbsp;@Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+
+                        <td class="text-center">
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.CustomerPhone))
+                        </td>
+                        <td class="text-center">
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.CustomerEmail))
+                        </td>
+                        <td class="">
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.CustomerAddress))
+                        </td>
+                        @if (item.CustomerStatus == true)
+                        {
+                            <td class="text-success py-1">Active</td>
+                        }
+                        else
+                        {
+                            <td class="text-danger py-1">Deactive</td>
+                        }
+                        <td class="text-center">
+                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-info" style="padding-left:12px;padding-right:12px"  asp-action="Edit" asp-route-id="@item.CustomerId" title="Edit"><i class="icon-pencil"></i></a>
+                            @if (item.CustomerStatus == true)
+                            {
+                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" style="padding-left:12px;padding-right:12px"  asp-action="Delete" asp-route-id="@item.CustomerId" title="Click For Offline"><i class="icon-power-off" ></i></a>
+                            }
+                            else
+                            {
+                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px"  asp-action="Delete" asp-route-id="@item.CustomerId" title="Click For Online"><i class="icon-power-off"></i></a>
+
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

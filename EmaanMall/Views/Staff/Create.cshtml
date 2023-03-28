@@ -1,0 +1,110 @@
+﻿@model EmaanMall.Models.Staff
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section productCreatejscss{
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/simple-line-icon.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>
+                    Add Staff Details
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <form asp-action="create" class="form theme-form wizard-horizontal" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="StaffName" class="control-label">Name </label>
+                                            <input asp-for="StaffName" class="form-control" required />
+                                            <span asp-validation-for="StaffName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="Phone" class="control-label">Phone Number</label>
+                                            <input asp-for="Phone" class="form-control" required />
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label">Email</label>
+                                            <input asp-for="Email" value=@ViewBag.Email class="form-control" readonly />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="control-label">Password</label>
+                                            <input asp-for="Password" value=@ViewBag.password class="form-control" readonly />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Address:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" asp-for="Address"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Image" class="control-label">Image</label>
+                                            <input type="file" name="Images" asp-for="Image" class="form-control imgs" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Add</button><button type="reset" class="btn btn-danger">Cancel</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section productCreatejs{
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+
+    <script src="../assets/js/icons/icons-notify.js"></script>
+    <script src="../assets/js/icons/icon-clipart.js"></script>
+
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
+}

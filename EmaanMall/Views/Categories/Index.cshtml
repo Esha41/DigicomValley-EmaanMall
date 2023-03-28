@@ -1,0 +1,106 @@
+﻿@model IEnumerable<EmaanMall.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <!-- Container-fluid starts-->
+    <div class="page-body-wrapper sidebar-icon">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Categories</h3>
+                    </div>
+                    <div class="col-6" style="text-align:right">
+                        <h5><a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn btn-primary" asp-action="Create">Create New</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Zero Configuration  Starts-->
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="display" id="basic-1">
+
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                             Category Icon
+                                            </th>
+
+
+                                            <th>
+                                          Category Name
+                                            </th>
+
+                                            <th>Status</th>
+                                            <th class="text-center">
+                                                Action
+                                            </th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>
+                                                <img src="~/Uploads/@item.CategoryIcon" height="70" width="80" />
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CategoryName)
+                                            </td>
+                                            @if (item.CategoryStatus == true)
+                                            {
+                                                <td class="text-success py-1">Active</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="text-danger py-1">Deactive</td>
+                                            }
+                                        <td class="text-center">
+                                            <a class="mb-2 mr-2 btn-icon-only btn-shadow btn-dashed btn btn-outline-info" style="padding-left:12px;padding-right:12px" asp-action="Edit" asp-route-id="@item.CategoryId" title="Edit"><i class="icon-pencil"></i></a>
+
+                                            <a class="mb-2 mr-2 btn-icon-only btn-shadow btn-dashed btn btn-outline-warning" style="padding-left:12px;padding-right:12px" asp-action="Details" asp-route-id="@item.CategoryId" title="Details"><i class="icon-comment-alt"></i></a>
+                                            @if (item.CategoryStatus == true)
+                                            {
+                                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" style="padding-left:12px;padding-right:12px" asp-action="ChangeStatus" asp-route-id="@item.CategoryId" title="Click For Offline"><i class="icon-power-off"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px" asp-action="ChangeStatus" asp-route-id="@item.CategoryId" title="Click For Online"><i class="icon-power-off"></i></a>
+
+                                            }
+                                            @*  <a class="mb-2 mr-2 btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px" asp-action="Delete" asp-route-id="@item.CategoryId" title="Delete"><i class="icon-trash"></i></a>
+                                            *@
+                                        </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

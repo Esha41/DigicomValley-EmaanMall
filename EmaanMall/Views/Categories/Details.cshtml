@@ -1,0 +1,67 @@
+﻿@model EmaanMall.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Category Details</h3>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row">
+
+                        <dt class="col-sm-2">
+                            Category Name :
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CategoryName)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Category Status :
+                        </dt>
+
+                        @if (Model.CategoryStatus == true)
+                        {
+                         <dd class="col-sm-10" style="color:green">
+                       Active
+                    </dd>
+                                }
+                                else
+                                {
+                    <dd class="col-sm-10" style="color:red">
+                       Deactive
+                    </dd>
+                                }
+                               
+                           
+                            <dt class="col-sm-2">
+                                Category Icon :
+                            </dt>
+                            <dd class="col-sm-10">
+                                <img src="~/Uploads/@Model.CategoryIcon" height="100" width="100" />
+                            </dd>
+                        </dl>
+                    <div>
+                        <a asp-action="Index" class="btn btn-info">Back to list</a>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+

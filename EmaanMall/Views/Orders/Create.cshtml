@@ -1,0 +1,156 @@
+﻿@model EmaanMall.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create Order</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="CustomerId" class="control-label">Customer Name</label>
+                        <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderSubTotal" class="control-label">Order SubTotal</label>
+                        <input asp-for="OrderSubTotal" class="form-control" />
+                        <span asp-validation-for="OrderSubTotal" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderTotalPrice" class="control-label">Order Total Price </label>
+                        <input asp-for="OrderTotalPrice" class="form-control" />
+                        <span asp-validation-for="OrderTotalPrice" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderDeliveryCharges" class="control-label">Delivery Charges</label>
+                        <input asp-for="OrderDeliveryCharges" class="form-control" />
+                        <span asp-validation-for="OrderDeliveryCharges" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderDiscountPrice" class="control-label">Discount Price</label>
+                        <input asp-for="OrderDiscountPrice" class="form-control" />
+                        <span asp-validation-for="OrderDiscountPrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderGST" class="control-label">Order GST</label>
+                        <input asp-for="OrderGST" class="form-control" />
+                        <span asp-validation-for="OrderGST" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderPaymentMethod" class="control-label">Payment Method</label>
+                        <input asp-for="OrderPaymentMethod" class="form-control" />
+                        <span asp-validation-for="OrderPaymentMethod" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderDate" class="control-label">Order Date</label>
+                        <input asp-for="OrderDate" class="form-control" />
+                        <span asp-validation-for="OrderDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderShippingAddress" class="control-label">Order Shipping Address</label>
+                        <input asp-for="OrderShippingAddress" class="form-control" />
+                        <span asp-validation-for="OrderShippingAddress" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderShippingProvince" class="control-label">Shipping Province</label>
+                        <input asp-for="OrderShippingProvince" class="form-control" />
+                        <span asp-validation-for="OrderShippingProvince" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderShippingCity" class="control-label">Shipping City</label>
+                        <input asp-for="OrderShippingCity" class="form-control" />
+                        <span asp-validation-for="OrderShippingCity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderRecipentName" class="control-label">Recipent Name</label>
+                        <input asp-for="OrderRecipentName" class="form-control" />
+                        <span asp-validation-for="OrderRecipentName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderRecipentPhone" class="control-label">Recipent Phone</label>
+                        <input asp-for="OrderRecipentPhone" class="form-control" />
+                        <span asp-validation-for="OrderRecipentPhone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderRecipentEmail" class="control-label">Recipent Email</label>
+                        <input asp-for="OrderRecipentEmail" class="form-control" />
+                        <span asp-validation-for="OrderRecipentEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderNo" class="control-label">Order No</label>
+                        <input asp-for="OrderNo" class="form-control" />
+                        <span asp-validation-for="OrderNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderReceiveAmount" class="control-label">Receive Amount</label>
+                        <input asp-for="OrderReceiveAmount" class="form-control" />
+                        <span asp-validation-for="OrderReceiveAmount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="OrderRemainingAmount" class="control-label">Remaining Amount</label>
+                        <input asp-for="OrderRemainingAmount" class="form-control" />
+                        <span asp-validation-for="OrderRemainingAmount" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Add</button><button type="reset" asp-action="Index" class="btn btn-danger">Cancel</button></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

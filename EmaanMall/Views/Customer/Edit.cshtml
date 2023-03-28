@@ -1,0 +1,97 @@
+﻿@model EmaanMall.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Edit Customer</h3>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="hidden" asp-for="CustomerId" />
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label">First Name</label>
+                                    <input asp-for="FirstName" class="form-control" required />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label">Last Name</label>
+                                    <input asp-for="LastName" class="form-control" required />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CustomerPhone" class="control-label">Phone</label>
+                                    <input asp-for="CustomerPhone" class="form-control" required />
+                                    <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CustomerEmail" class="control-label">Email</label>
+                                    <input asp-for="CustomerEmail" class="form-control" />
+                                    <span asp-validation-for="CustomerEmail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Address:</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="CustomerAddress" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                Product Status : &nbsp; &nbsp; &nbsp; &nbsp;   <input class="form-check-input" asp-for="CustomerStatus" />
+                            </label>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Edit</button><a asp-action="Index" class="btn btn-danger">Cancel</a></div>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

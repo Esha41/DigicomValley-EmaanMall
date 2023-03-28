@@ -1,0 +1,202 @@
+﻿@model EmaanMall.Models.ViewModel.VendorVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@section productCreatejscss{
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/simple-line-icon.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>
+                    Edit Vendor Details
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <form asp-action="EditPost" class="form theme-form wizard-horizontal" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <input asp-for="vendors.VendorId" hidden />
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="vendors.VendorName" class="control-label">Vendor Name </label>
+                                            <input asp-for="vendors.VendorName" class="form-control" required />
+                                            <span asp-validation-for="vendors.VendorName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="vendors.BusinessName" class="control-label">Business Name</label>
+                                            <input asp-for="vendors.BusinessName" class="form-control" />
+                                            <span asp-validation-for="vendors.BusinessName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="vendors.Phone" class="control-label">Phone Number</label>
+                                            <input asp-for="vendors.Phone" class="form-control" required />
+                                            <span asp-validation-for="vendors.Phone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="vendors.Email" class="control-label">Email</label>
+                                            <input asp-for="vendors.Email" class="form-control" readonly />
+                                            <span asp-validation-for="vendors.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="vendors.Password" class="control-label">Password</label>
+                                            <input asp-for="vendors.Password" class="form-control" readonly />
+                                            <span asp-validation-for="vendors.Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="container-fluid">
+                                                <div class="select2-drpdwn">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+
+                                                            <div class="mb-2">
+                                                                <div class="col-form-label">Select Business Categories:</div>
+                                                                <select class="js-example-placeholder-multiple col-sm-12" asp-for="ProductCategoryIds" asp-items="ViewBag.productsCategories" multiple="multiple">
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Address:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" asp-for="vendors.Address"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <fieldset class="form-group">
+                                            <label asp-for="vendors.Image">Vendor Photo</label>
+                                            <div class="custom-file">
+                                                <input name="vendorphoto" type="file" onchange="document.getElementById('showPhotoId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-sm-6 ">
+                                        <img src="~/Uploads/@Model.vendors.Image" id="showPhotoId" class="float-right" style="width:240px; height:150px;" />
+                                    </div>
+
+                                    <input type="hidden" class="form-control" id="showPhotoId" asp-for="vendors.Image" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Update</button><button asp-action="Profile" class="btn btn-danger">Cancel</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section productCreatejs{
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+
+    <script src="../assets/js/icons/icons-notify.js"></script>
+    <script src="../assets/js/icons/icon-clipart.js"></script>
+
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
+}
+<script>
+    //multiselector start
+    function Add() {
+        let div = document.createElement("div");
+        let li = document.createElement('input');
+        li.name = "Images";
+        li.type = "file";
+        li.classList = "imgs";
+        let del = document.createElement('button')
+        del.innerText = "Delete";
+
+        del.addEventListener("click", (e) => {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        });
+        div.appendChild(li);
+        div.appendChild(del);
+        document.querySelector('.text').appendChild(div);
+    }
+
+    function Delete() {
+        console.log(this.parentNode.remove());
+    }
+    //multiselector end
+    /////////image
+
+    function showImage() {
+        var file_data = $("#fileInput").prop("files")[0];
+        $('#ImageTab').append('<img style="cursor:pointer;width:150px;height:150px;" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFile()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtn').hide();
+        validateCust();
+
+    }
+
+    function ClearFile() {
+        $('#fileInput').val('');
+        $('#ImageTab').empty();
+        $('#selectImageBtn').show();
+        validateCust();
+
+    }
+
+    function showImageEdit() {
+        var file_data = $("#fileInputEdit").prop("files")[0];
+        $('#ImageTabEdit').append('<img style="cursor:pointer" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFileEdit()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtnEdit').hide();
+        validateCust();
+
+    }
+
+    function ClearFileEdit() {
+        $('#fileInputEdit').val('');
+        $('#ImageTabEdit').empty();
+        $('#selectImageBtnEdit').show();
+        validateCust();
+    }
+</script>

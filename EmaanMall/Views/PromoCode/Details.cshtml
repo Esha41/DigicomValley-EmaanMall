@@ -1,0 +1,57 @@
+﻿@model EmaanMall.Models.PromoCodes
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+
+    <!-- Container-fluid starts-->
+    <div class="page-body-wrapper sidebar-icon">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4><b>Promo Code Details</b></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-4"><b>Title</b> : @Model.Title</div>
+                                <div class="col-md-4"><b>Discount Price </b> :  @Model.discountPrice</div>
+                                <div class="col-md-4"><b>No of usage </b>:  @Model.NoOfUsage</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Start Date </b> :    @Convert.ToString(string.Format("{0:d/M/yyyy}", Model.StartDate))</div>
+                                <div class="col-md-4"><b>End Date </b> :     @Convert.ToString(string.Format("{0:d/M/yyyy}", Model.EndDate))</div>
+                                <div class="col-md-4"><b>Status </b> :  @Model.Status</div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-lg" asp-action="Index">Back to List</a>
+        </div>
+
+    </div>
+
+</div>

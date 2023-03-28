@@ -1,0 +1,108 @@
+﻿@model IEnumerable<EmaanMall.Models.PromoCodes>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<!-- tap on tap ends-->
+<!-- page-wrapper Start-->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>All Promo Codes</h3>
+            </div>
+            <div class="col-6" style="text-align:right">
+                <h5><a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn btn-primary" asp-action="Create">Create New</a></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="display" id="basic-1">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+
+                        <th>
+                            Promo Code
+                        </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                            End Date
+                        </th>
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.promoCode)
+                        </td>
+
+                        <td>
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.StartDate))
+                        </td>
+
+                        <td>
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.EndDate))
+                        </td>
+                        @if (item.Status == true)
+                        {
+                            <td class="text-success py-1">Active</td>
+                        }
+                        else
+                        {
+                            <td class="text-danger py-1">Deactive</td>
+                        }
+                        <td>
+                            @Convert.ToString(string.Format("{0:d/M/yyyy}", item.Date))
+                        </td>
+                        <td class="text-center">
+                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-info" style="padding-left:12px;padding-right:12px" asp-action="Edit" asp-route-id="@item.PromoCodesId" title="Edit"><i class="icon-pencil"></i></a>
+
+                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-warning" style="padding-left:12px;padding-right:12px" asp-action="Details" asp-route-id="@item.PromoCodesId" title="Details"><i class="icon-comment-alt"></i></a>
+                            @if (item.Status == true)
+                            {
+                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-success" style="padding-left:12px;padding-right:12px" asp-action="ChangeStatus" asp-route-id="@item.PromoCodesId" title="Click For Offline"><i class="icon-power-off"></i></a>
+                            }
+                            else
+                            {
+                                <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px" asp-action="ChangeStatus" asp-route-id="@item.PromoCodesId" title="Click For Online"><i class="icon-power-off"></i></a>
+
+                            }
+                            <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" style="padding-left:12px;padding-right:12px" asp-action="Delete" asp-route-id="@item.PromoCodesId" title="Delete"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

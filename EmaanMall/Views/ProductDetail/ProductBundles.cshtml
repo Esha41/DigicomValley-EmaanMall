@@ -1,0 +1,222 @@
+﻿@model EmaanMall.Models.ViewModel.ProductsVM
+
+@{
+    ViewData["Title"] = "Add Bundles";
+}
+@section productCreatejscss{
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/simple-line-icon.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>
+                    Add Product Bundles
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <form asp-action="ProductBundles" class="form theme-form wizard-horizontal" enctype="multipart/form-data">
+        <input hidden asp-for="ProductDetailId" value=@ViewBag.ProductDetailId>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Product Bundles
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    @if (ViewBag.isBundleExist == false)
+                                    {
+                                        <div class="col-sm-12">
+                                            <div class="" id="PriceForm">
+                                                <div class="row clearfix">
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label> Quantity </label>
+                                                            <input required type="number" name="productPricesBundles[0].ProductBundleQuantity" value="" class="form-control" />
+                                                            <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundleQuantity" data-valmsg-replace="true"></span>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label> Price </label>
+                                                            <input required type="number" name="productPricesBundles[0].ProductBundlePrice" value="" class="form-control" />
+                                                            <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundlePrice" data-valmsg-replace="true"></span>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label> Unit </label>
+                                                            <input required type="text" name="productPricesBundles[0].ProductBundleUnit" value="" class="form-control" />
+                                                            <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundleUnit" data-valmsg-replace="true"></span>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label> Discount Price </label>
+                                                            <input type="number" name="productPricesBundles[0].DiscountPrice" value="" class="form-control" />
+                                                            <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].DiscountPrice" data-valmsg-replace="true"></span>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label>Select Product Size</label>
+                                                            <select asp-for=" productPricesBundles[0].SizeId" required class="form-control" name="productPricesBundles[0].SizeId" asp-items="ViewBag.productsSize">
+                                                                <option>Please select one</option>
+                                                            </select>
+                                                            <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].SizeId" data-valmsg-replace="true"></span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm()">
+                                                    <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm()" value="Remove" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-12">
+                                            <div class="" id="PriceForm">
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm()">
+                                                    <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm()" value="Remove" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <br />
+
+                                    }
+                                </div>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Add</button><a asp-action="Index" class="btn btn-danger">Cancel</a></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section productCreatejs{
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+
+    <script src="../assets/js/icons/icons-notify.js"></script>
+    <script src="../assets/js/icons/icon-clipart.js"></script>
+
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
+}
+<script type="text/javascript">
+    window.onload = function () {
+
+     var item = @(Model != null ? Html.Raw(Json.Serialize( Model.productPricesBundles)):new Object());
+        var childData = @Html.Raw(Json.Serialize(ViewBag.productsSize));
+       
+     for (var i = 0; i < item.length; i++) {
+            nearByDiv = document.getElementById('PriceForm');
+         var newdiv = document.createElement('DIV');
+            newdiv.className = 'row clearfix';
+            var newForm1 = '<div class="col-sm-2"> <div class="form-group" ><label> Quantity : </label> <input  type="number" required name="productPricesBundles[' + i + '].ProductBundleQuantity" value="' + item[i].productBundleQuantity + '" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleQuantity" data-valmsg-replace="true"></span></div></div>';
+            var newForm2 = '<div class="col-sm-2"> <div class="form-group" ><label> Price : </label> <input required type="number" required name="productPricesBundles[' + i + '].ProductBundlePrice" value="' + item[i].productBundlePrice + '" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundlePrice" data-valmsg-replace="true"></span></div></div>';
+            var newForm3 = '<div class="col-sm-2"> <div class="form-group" ><label> Unit : </label> <input required type="text" required name="productPricesBundles[' + i + '].ProductBundleUnit" value="' + item[i].productBundleUnit + '" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleUnit" data-valmsg-replace="true"></span></div></div>';
+         var newForm4 = '<div class="col-sm-2"> <div class="form-group" ><label> Discount Price : </label> <input type="number" name="productPricesBundles[' + i + '].DiscountPrice" value="' + item[i].discountPrice + '" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].DiscountPrice" data-valmsg-replace="true"></span></div></div>';
+
+            var newForm5 = '<div class="col-sm-3"><div class="form-group" ><label>Select Product Size</label><select id="productPricesBundles_' + i + '__SizeId" required class="form-control" name="productPricesBundles[' + i + '].SizeId" ><option>Please select one</option>';
+           
+         for (var a = 0; a < childData.length; a++) {
+             if (parseInt(childData[a].value) == item[i].sizeId) 
+                 newForm5 += '<option value="' + childData[a].value + '" selected>' + childData[a].text + '</option>';
+             else
+                 newForm5 += '<option value="' + childData[a].value + '">' + childData[a].text + '</option>';
+             
+
+             
+         }
+            newForm5 += '</select> <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].SizeId" data-valmsg-replace="true"></span></div></div>';
+
+
+            var completeForm = newForm1 + newForm2 + newForm3 + newForm4 + newForm5 + "<br />";
+
+            newdiv.innerHTML = completeForm;
+            nearByDiv.appendChild(newdiv);
+
+    }
+    }
+</script>
+<script>
+
+    var i = 0;
+    var j = 0;
+    function DynamicForm() {
+        
+        nearByDiv = document.getElementById('PriceForm');
+        var childData = @Html.Raw(Json.Serialize(ViewBag.productsSize));
+        var e = nearByDiv.children;
+        var length = e.length;
+
+        i = length;
+        var newdiv = document.createElement('DIV');
+        newdiv.className = 'row clearfix';
+        var newForm1 = '<div class="col-sm-2"> <div class="form-group" ><label> Quantity : </label> <input  type="number" required name="productPricesBundles[' + i + '].ProductBundleQuantity" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleQuantity" data-valmsg-replace="true"></span></div></div>';
+        var newForm2 = '<div class="col-sm-2"> <div class="form-group" ><label> Price : </label> <input required type="number" required name="productPricesBundles[' + i + '].ProductBundlePrice" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundlePrice" data-valmsg-replace="true"></span></div></div>';
+        var newForm3 = '<div class="col-sm-2"> <div class="form-group" ><label> Unit : </label> <input required type="text" required name="productPricesBundles[' + i + '].ProductBundleUnit" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleUnit" data-valmsg-replace="true"></span></div></div>';
+        var newForm4 = '<div class="col-sm-2"> <div class="form-group" ><label> Discount Price : </label> <input type="number" name="productPricesBundles[' + i + '].DiscountPrice" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].DiscountPrice" data-valmsg-replace="true"></span></div></div>';
+
+        var newForm5 = '<div class="col-sm-3"><div class="form-group" ><label>Select Product Size</label><select id="productPricesBundles_' + i + '__SizeId" required class="form-control" name="productPricesBundles[' + i + '].SizeId" ><option>Please select one</option>';
+        for (var a = 0; a < childData.length; a++)
+            newForm5 += '<option value="' + childData[a].value + '">' + childData[a].text + '</option>';
+        newForm5 += '</select> <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].SizeId" data-valmsg-replace="true"></span></div></div>';
+
+        var completeForm = newForm1 + newForm2 + newForm3 + newForm4 + newForm5 + "<br />";
+        newdiv.innerHTML = completeForm;
+        nearByDiv.appendChild(newdiv);
+    }
+    function RemoveForm() {
+        var nearByDiv = document.getElementById('PriceForm');
+        document.getElementById('PriceForm').removeChild(nearByDiv.lastChild);
+    }
+
+
+</script>

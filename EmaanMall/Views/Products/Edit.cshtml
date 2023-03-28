@@ -1,0 +1,71 @@
+@model EmaanMall.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Edit Product</h3>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="hidden" asp-for="ProductId" />
+                                <div class="form-group">
+                                    <label asp-for="ProductName" class="control-label">Product Name</label>
+                                    <input asp-for="ProductName" class="form-control" required/>
+                                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ProductDate" class="control-label">Date</label>
+                                    <input asp-for="ProductDate" class="form-control" required/>
+                                    <span asp-validation-for="ProductDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                Product Status : &nbsp; &nbsp; &nbsp; &nbsp;   <input class="form-check-input" asp-for="ProductStatus" />
+                            </label>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Edit</button><a asp-action="Index" class="btn btn-danger">Cancel</a></div>
+                            </div>
+                        </div>
+                    </form>
+                        
+
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                    @section Scripts {
+                        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                    }

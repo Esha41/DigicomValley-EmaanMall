@@ -1,0 +1,72 @@
+﻿@model IEnumerable<EmaanMall.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Products</h3>
+                </div>
+                <div class="col-6" style="text-align:right">
+                    <h5><a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn btn-primary" asp-action="Create">Create New</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Product Name
+                                                </th>
+
+
+
+                                                <th class="text-center">
+                                                    Date
+                                                </th>
+
+                                                <th class="text-center">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                                </td>
+                                                
+                                                <td class="text-center">
+                                                  @Convert.ToString(string.Format("{0:d/M/yyyy}",item.ProductDate))
+                                                </td>
+                                                
+                                                <td  class="text-center">
+                                                    <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-warning" asp-action="Details" asp-route-id="@item.ProductId"><i class="icon-comment-alt"></i></a>
+                                                    <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ProductId"><i class="icon-pencil"></i></a>
+                                                    <a class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ProductId"><i class="icon-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+
+ 

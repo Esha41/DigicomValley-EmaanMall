@@ -1,0 +1,116 @@
+﻿@model IEnumerable<EmaanMall.Models.OrderProduct>
+
+@{
+    ViewData["Title"] = "Details";
+    OrderProduct orderProduct = new OrderProduct();
+    if (Model.Count() > 0)
+        orderProduct = Model.FirstOrDefault();
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <!-- Container-fluid starts-->
+    <div class="page-body-wrapper sidebar-icon">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4><b>Orders Details</b></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-4"><b>Order Date  </b> :   @Convert.ToString(string.Format("{0:d/M/yyyy}", Model.FirstOrDefault().Order.OrderDate))</div>
+                                <div class="col-md-4"><b>Order No </b> :  @Model.FirstOrDefault().Order.OrderNo</div>
+                                <div class="col-md-4"><b>Sub Total </b>:  @Model.FirstOrDefault().Order.OrderSubTotal</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Discount </b> : @Model.FirstOrDefault().Order.OrderDiscountPrice</div>
+                                <div class="col-md-4"><b>Delivery Charges </b> :  @Model.FirstOrDefault().Order.OrderDeliveryCharges</div>
+                                <div class="col-md-4"><b>Total Price </b>:  @Model.FirstOrDefault().Order.OrderTotalPrice</div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <h4><b>Recipent Details</b></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-4"><b>Recipent Name  </b> : @Model.FirstOrDefault().Order.OrderRecipentName</div>
+                                <div class="col-md-4"><b>Recipent Email </b> :  @Model.FirstOrDefault().Order.OrderRecipentEmail</div>
+                                <div class="col-md-4"><b>Recipent Phone </b>:  @Model.FirstOrDefault().Order.OrderRecipentPhone</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Province </b> : @Model.FirstOrDefault().Order.OrderShippingProvince</div>
+                                <div class="col-md-4"><b>City  </b> :  @Model.FirstOrDefault().Order.OrderShippingCity</div>
+                                <div class="col-md-4"><b>Address </b>:  @Model.FirstOrDefault().Order.OrderShippingAddress</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Payment Method </b> : @Model.FirstOrDefault().Order.OrderPaymentMethod</div>
+                                <div class="col-md-4"><b>Received Amount  </b> :  @Model.FirstOrDefault().Order.OrderReceiveAmount</div>
+                                <div class="col-md-4"><b>Remaining Method </b>:  @Model.FirstOrDefault().Order.OrderRemainingAmount</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Order Status </b> : @Model.FirstOrDefault().Order.OrderStatus</div>
+                                <div class="col-md-4"><b>Order GST </b> : @Model.FirstOrDefault().Order.OrderGST</div>
+                            </div>
+
+                            <br />
+                            <br />
+
+                            <h4><b>Ordered Products</b></h4>
+                           
+                            @{ var count = 0;}
+                            @foreach (var item in Model)
+                            {
+                                count=count + 1;
+                                if (Model.Count() > 1)
+                                {
+                        <h5><b>Product @count:</b></h5>
+                                }
+                                <br />
+                        <div class="row">
+                            <div class="col-md-4"><b>Product Name  </b> : @item.productDetail.Product.ProductName</div>
+                            <div class="col-md-4"><b>Price  </b> :  @item.OrderProductPrice</div>
+                            <div class="col-md-4"><b>Unit  </b> :  @item.OrderProductUnit</div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4"><b>Quantity </b> : @item.OrderProductQuantity</div>
+                            <div class="col-md-4"><b>Product Description  </b> :  @item.productDetail.ProductDetailDescription</div>
+                        </div>
+                        <hr />
+                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-lg" asp-action="Index">Back to List</a>
+        </div>
+      
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-EmaanMall-EA813CED-4693-4402-8EE4-B0560A1DCC85</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20211227130156_AddTablesToDB4.cs" />
+    <Compile Remove="Migrations\20211227130156_AddTablesToDB4.Designer.cs" />
+    <Compile Remove="Migrations\20220208080628_AddUpdt2.cs" />
+    <Compile Remove="Migrations\20220208080628_AddUpdt2.Designer.cs" />
+    <Compile Remove="Migrations\20220211080636_Add0todb.cs" />
+    <Compile Remove="Migrations\20220211080636_Add0todb.Designer.cs" />
+    <Compile Remove="Migrations\20220211081228_Addorder.cs" />
+    <Compile Remove="Migrations\20220211081228_Addorder.Designer.cs" />
+    <Compile Remove="Migrations\20220211095041_AddOrderIdTorr.cs" />
+    <Compile Remove="Migrations\20220211095041_AddOrderIdTorr.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+</Project>

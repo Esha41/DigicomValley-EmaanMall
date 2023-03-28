@@ -1,0 +1,70 @@
+﻿@model EmaanMall.Models.ViewModel.ProductsVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+<div class="page-wrapper compact-wrapper" id="pageWrapper">
+
+
+    <!-- Container-fluid starts-->
+    <div class="page-body-wrapper sidebar-icon">
+        <div class="container-fluid">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4><b>Product Inquiry Details</b></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-4"><b>Customer Name </b> : @Model.productInquiries.customer.FirstName @Model.productInquiries.customer.LastName</div>
+                                <div class="col-md-4"><b>Product Name </b> :  @Model.productInquiries.productDetail.Product.ProductName</div>
+                                <div class="col-md-4"><b>Date </b>:  @Model.productInquiries.ProductInquiryDate</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4"><b>Quantity </b> : @Model.productInquiries.ProductInquiryQuantity</div>
+                                <div class="col-md-4"><b>Description </b> :  @Model.productInquiries.ProductInquiryDescription</div>
+                                <div class="col-md-4"><b>Status </b> :  @Model.productInquiries.ProductInquiryStatus</div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;Admin Remarks:-</b>
+                                    <br />
+                                <br />
+                                    @{
+                                        foreach (var item in Model.productInquiryRemarks)
+                                        {
+                                            <div class="col-md-12">- @item.AdminRemarks</div>
+                                            <br />
+                                        }
+                                    }
+                                   
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-lg" asp-action="Index">Back to List</a>
+        </div>
+      
+    </div>
+
+</div>

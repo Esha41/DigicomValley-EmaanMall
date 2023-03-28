@@ -1,0 +1,521 @@
+﻿@model EmaanMall.Models.ViewModel.ProductsVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+@section productCreatejscss{
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/datatables.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/simple-line-icon.css">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/select2.css">
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>
+                    Create Product Details
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <form asp-action="create" class="form theme-form wizard-horizontal" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Product Details
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label asp-for="productDetails.Product.ProductName" class="control-label">Name</label>
+                                            <input asp-for="productDetails.Product.ProductName" class="form-control" required />
+                                            <span asp-validation-for="productDetails.Product.ProductName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <div class="container-fluid">
+                                                <div class="select2-drpdwn">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+
+                                                            <div class="mb-2">
+                                                                <div class="col-form-label">Select Product Categories:</div>
+                                                                <select class="js-example-placeholder-multiple col-sm-12" asp-for="ProductCategoryIds" asp-items="ViewBag.productsCategories" multiple="multiple" required>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (!User.IsInRole("Vendor"))
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="media">
+                                                <label class="col-form-label m-r-10">Featured:</label>
+                                                <div class="media-body text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" asp-for="productDetails.FeatureProduct" checked=""><span class="switch-state"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="media">
+                                                <label class="col-form-label m-r-10">Best Sell:</label>
+                                                <div class="media-body text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" asp-for="productDetails.BestSell" checked=""><span class="switch-state"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="media">
+                                                <label class="col-form-label m-r-10">Top Rated:</label>
+                                                <div class="media-body text-right">
+                                                    <label class="switch">
+                                                        <input type="checkbox" asp-for="productDetails.TopRated" checked=""><span class="switch-state"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <br />
+                                }
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Guarantee Policy:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" asp-for="productDetails.GuaranteePolicy"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Description:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="productDetails.ProductDetailDescription" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Colors
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="" id="ColorForm">
+                                            <div class="row clearfix">
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Color Name </label>
+                                                        <input required type="text" name="ProductColorsList[0].ColorName" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="ProductColorsList[0].ColorName" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Color Code </label>
+                                                        <input required type="text" name="ProductColorsList[0].ColorCode" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="ProductColorsList[0].ColorCode" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <br />
+
+                                                        <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm2()">
+                                                        <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm3()" value="Remove" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Size
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="" id="SizeForm">
+                                            <div class="row clearfix">
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Size </label>
+                                                        <input required type="text" name="ProductSizeList[0].Size" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="ProductSizeList[0].Size" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <br />
+                                                        <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm5()">
+                                                        <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm5()" value="Remove" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                       
+                                    </div>
+
+                                </div>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             @*   <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Product Bundles
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="" id="PriceForm">
+                                            <div class="row clearfix">
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Quantity </label>
+                                                        <input required type="number" name="productPricesBundles[0].ProductBundleQuantity" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundleQuantity" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Price </label>
+                                                        <input required type="number" name="productPricesBundles[0].ProductBundlePrice" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundlePrice" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label> Unit </label>
+                                                        <input required type="text" name="productPricesBundles[0].ProductBundleUnit" value="" class="form-control" />
+                                                        <span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[0].ProductBundleUnit" data-valmsg-replace="true"></span>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm()">
+                                                <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm()" value="Remove" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              *@  @if (ViewBag.isImg == false)
+                {
+                    <p style="color:red">&nbsp;&nbsp;&nbsp;&nbsp; Image missing!</p>
+                }
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        Images
+                                    </h4>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form theme-form">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="text"></div>
+                                        <br />
+                                        <label>Click to Add Product Image <span class="text-danger">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
+                                        <img style="width:60px;margin-left: 20px; margin-right:20px" id="selectImageBtn" class="pointer" onclick="Add()" src="~/assets/images/ChooseImage.jpg" title="add_image.svg">
+                                    </div>
+                                    @*       <div class="col-sm-12">
+                                <div class="" id="ImageForm">
+                                    <div class="row clearfix">
+
+                                        <div class="col-sm-6">
+
+                                            <fieldset class="form-group">
+                                                <label>Product Image</label>
+                                                <div class="custom-file">
+                                                    <input required type="file" name="productImages" value="" onchange="document.getElementById('showPhotoId').src = window.URL.createObjectURL(this.files[0]);" class="custom-file-input" id="inputGroupFile01" />
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+
+                                                    <span class="field-validation-valid text-danger" data-valmsg-for="productImages[0].ProductImageName" data-valmsg-replace="true"></span>
+
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-sm-6 ">
+                                            <img src="~/Images/ChooseImage.jpg" id="showPhotoId" class="float-left" style="width:240px; height:150px;" />
+                                        </div>
+
+                                        <input type="hidden" class="form-control" id="showPhotoId" />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <br />
+
+                                    <div class="form-group">
+                                        <input type="button" class="btn btn-success btn-round" value="Add New" onclick="DynamicForm2()">
+                                        <input type="button" class="btn btn-danger btn-round" onclick="RemoveForm2()" value="Remove" />
+                                    </div>
+                                </div>
+                            </div>*@
+
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-0"><button type="submit" class="btn btn-success mr-3">Add</button><a class="btn btn-danger">Cancel</a></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section productCreatejs{
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+
+    <script src="../assets/js/icons/icons-notify.js"></script>
+    <script src="../assets/js/icons/icon-clipart.js"></script>
+
+    <script src="../assets/js/select2/select2.full.min.js"></script>
+    <script src="../assets/js/select2/select2-custom.js"></script>
+}
+<script>
+
+    //multiselector start
+    function Add() {
+        let div = document.createElement("div");
+        let li = document.createElement('input');
+        li.name = "Images";
+        li.type = "file";
+        li.classList = "imgs";
+        let del = document.createElement('button')
+        del.innerText = "Delete";
+
+        del.addEventListener("click", (e) => {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        });
+        div.appendChild(li);
+        div.appendChild(del);
+        document.querySelector('.text').appendChild(div);
+    }
+
+    function Delete() {
+        console.log(this.parentNode.remove());
+    }
+    //multiselector end
+    /////////image
+
+    function showImage() {
+        var file_data = $("#fileInput").prop("files")[0];
+        $('#ImageTab').append('<img style="cursor:pointer;width:150px;height:150px;" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFile()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtn').hide();
+        validateCust();
+
+    }
+
+    function ClearFile() {
+        $('#fileInput').val('');
+        $('#ImageTab').empty();
+        $('#selectImageBtn').show();
+        validateCust();
+
+    }
+
+    function showImageEdit() {
+        var file_data = $("#fileInputEdit").prop("files")[0];
+        $('#ImageTabEdit').append('<img style="cursor:pointer" src="' + window.URL.createObjectURL(file_data) + '" alt="' + file_data.name + '" /> <i onclick="ClearFileEdit()" class="fas fa-window-close centerBtn"></i>');
+        $('#selectImageBtnEdit').hide();
+        validateCust();
+
+    }
+
+    function ClearFileEdit() {
+        $('#fileInputEdit').val('');
+        $('#ImageTabEdit').empty();
+        $('#selectImageBtnEdit').show();
+        validateCust();
+    }
+</script>
+<script>
+
+    var i = 0;
+    var j = 0;
+  @*  function DynamicForm() {
+        nearByDiv = document.getElementById('PriceForm');
+        var e = nearByDiv.children;
+        var length = e.length;
+
+        i = length;
+        var newdiv = document.createElement('DIV');
+        newdiv.className = 'row clearfix';
+        var newForm1 = '<div class="col-sm-4"> <div class="form-group" ><label> Quantity : </label> <input  type="number" required name="productPricesBundles[' + i + '].ProductBundleQuantity" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleQuantity" data-valmsg-replace="true"></span></div></div>';
+        var newForm2 = '<div class="col-sm-4"> <div class="form-group" ><label> Price : </label> <input required type="number" required name="productPricesBundles[' + i + '].ProductBundlePrice" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundlePrice" data-valmsg-replace="true"></span></div></div>';
+        var newForm3 = '<div class="col-sm-4"> <div class="form-group" ><label> Unit : </label> <input required type="text" required name="productPricesBundles[' + i + '].ProductBundleUnit" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleUnit" data-valmsg-replace="true"></span></div></div>';
+
+        var completeForm = newForm1 + newForm2 + newForm3 + "<br />";
+        newdiv.innerHTML = completeForm;
+        nearByDiv.appendChild(newdiv);
+    }
+    function RemoveForm() {
+        var nearByDiv = document.getElementById('PriceForm');
+        document.getElementById('PriceForm').removeChild(nearByDiv.lastChild);
+    }
+*@
+    function DynamicForm5() {
+        nearByDiv = document.getElementById('SizeForm');
+        var e = nearByDiv.children;
+        var length = e.length;
+
+        i = length;
+        var newdiv = document.createElement('DIV');
+        newdiv.className = 'row clearfix';
+        var newForm1 = '<div class="col-sm-4"> <div class="form-group" ><label> Size : </label> <input  type="text" required name="ProductSizeList[' + i + '].Size" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="ProductSizeList[' + i + '].Size" data-valmsg-replace="true"></span></div></div>';
+       
+        var completeForm = newForm1 + "<br />";
+        newdiv.innerHTML = completeForm;
+        nearByDiv.appendChild(newdiv);
+    }
+    function RemoveForm5() {
+        var nearByDiv = document.getElementById('SizeForm');
+        document.getElementById('SizeForm').removeChild(nearByDiv.lastChild);
+    }
+    function DynamicForm2() {
+        nearByDiv = document.getElementById('ColorForm');
+        var e = nearByDiv.children;
+        var length = e.length;
+
+        i = length;
+        var newdiv = document.createElement('DIV');
+        newdiv.className = 'row clearfix';
+        //var newForm1 = '<div class="col-sm-4"> <div class="form-group" ><label> Quantity : </label> <input  type="number" required name="productPricesBundles[' + i + '].ProductBundleQuantity" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="productPricesBundles[' + i + '].ProductBundleQuantity" data-valmsg-replace="true"></span></div></div>';
+
+
+        var newForm1 ='<div class="col-sm-4"><div class="form-group"><label> Color Name </label><input required type="text" name="ProductColorsList[' + i + '].ColorName" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="ProductColorsList[' + i + '].ColorName" data-valmsg-replace="true"></span></div></div>';
+        var newForm2 = '<div class="col-sm-4"><div class="form-group"><label> Color Code </label><input required type="text" name="ProductColorsList[' + i + '].ColorCode" value="" class="form-control" /><span class="field-validation-valid text-danger" data-valmsg-for="ProductColorsList[' + i + '].ColorCode" data-valmsg-replace="true"></span></div></div>';
+
+
+        var completeForm = newForm1 + newForm2+ "<br />";
+        newdiv.innerHTML = completeForm;
+        nearByDiv.appendChild(newdiv);
+    }
+    function RemoveForm3() {
+        var nearByDiv = document.getElementById('ColorForm');
+        document.getElementById('ColorForm').removeChild(nearByDiv.lastChild);
+    }
+    function RemoveForm2() {
+        var nearByDiv = document.getElementById('ImageForm');
+        document.getElementById('ImageForm').removeChild(nearByDiv.lastChild);
+    }
+
+</script>
